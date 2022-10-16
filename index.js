@@ -29,6 +29,11 @@ function setDepartures(tripElement, departureList) {
   const departuresContainer = descriptionWithDepartures.querySelector('.trip__departures');
   setLiElements(departuresContainer, shotDepartureList, departureSelector);
 
+  departureList.length > 4 && departuresContainer.lastElementChild.addEventListener('click', () => {
+    departuresContainer.lastElementChild.remove()
+    setLiElements(departuresContainer, departureList.slice(3), departureSelector);
+  });
+
   descriptionsBlock.append(descriptionWithDepartures);
 }
 
@@ -46,13 +51,13 @@ function renderTripList() {
       .firstElementChild
       .cloneNode(true);
     trip.querySelector('.trip__image').src = item.image;
-    item.label ? trip.querySelector('.trip__label').textContent = item.label : trip.querySelector('.trip__label').classList.add('trip__label_hidden');
+    item.label ? trip.querySelector('.trip__label').textContent = item.label : trip.querySelector('.trip__label').remove();
     trip.querySelector('.trip__time').textContent = item.time;
     item.special && trip.querySelector('.trip__label').classList.add(`trip__label_content_${item.special}`);
-    trip.querySelector('.trip__sale').textContent = item.sale ? 'Акция - ' : '';
+    item.sale ? trip.querySelector('.trip__sale').textContent = 'Акция - ' : trip.querySelector('.trip__sale').remove();
     trip.querySelector('#caption').textContent = item.title;
     trip.querySelector('#price').textContent = item.price;
-    trip.querySelector('#cash-price').textContent = item.priceCash;
+    item.priceCash ? trip.querySelector('#cash-price').textContent = item.priceCash : trip.querySelector('.trip__cash-price').remove();
     setDescriptions(trip, item.options, item.departures);
 
     tripsSection.append(trip);
