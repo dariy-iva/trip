@@ -134,6 +134,8 @@
 }
 
 .trip__prices {
+  display: flex;
+  flex-direction: column;
   color: var(--color-black);
 }
 
@@ -290,10 +292,13 @@
     gap: 14px;
   }
 
+  .trip__prices {
+    gap: 2px;
+  }
+
   .trip__price {
     font-size: 36px;
     line-height: 1;
-    margin-bottom: 2px;
   }
 
   .trip__cash-price {
