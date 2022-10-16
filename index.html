@@ -5,81 +5,45 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Поездки</title>
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="styles/index.css">
 </head>
 <body class="body">
 <main class="content">
   <section class="trips">
-    <!--        <template class="trip-template">-->
-    <article class="trip">
-      <div class="trip__image-container">
-        <img src="./images/trips/kazanskiy.png" alt="фото" class="trip__image">
-        <span class="trip__label trip__label_content_new">новинка</span>
-      </div>
-      <div class="trip__info">
-        <span class="trip__time">2 часа</span>
-        <p class="trip__caption"><span class="trip__sale">Акция - </span>Обзорная экскурсия по рекам и каналам с
-          остановками Hop on Hop Off 2019</p>
-        <ul class="trip__descriptions">
-          <li class="trip__description">Билет на целый день</li>
-          <li class="trip__description">Неограниченное число катаний</li>
-          <li class="trip__description">6 остановок у главных достопримечательностей</li>
-          <li class="trip__description">Ближайший рейс сегодня
-            <ul class="trip__departures">
-              <li class="trip__departure">12:00</li>
-              <li class="trip__departure">13:00</li>
-              <li class="trip__departure">14:00</li>
-              <li class="trip__departure">15:00</li>
-              <!--          <li class="trip__departure">16:00</li>-->
-            </ul>
-          </li>
-        </ul>
-        <div class="trip__footer">
-          <div class="trip__prices">
-            <span class="trip__price">900&nbsp;&#8381;</span>
-            <span class="trip__cash-price">1200&nbsp;&#8381; на причале</span>
-          </div>
-          <button type="button" class="trip__button">Подробнее</button>
+    <template class="trip-template">
+      <article class="trip">
+        <div class="trip__image-container">
+          <img src="" alt="фото" class="trip__image">
+          <span class="trip__label trip__label_content_new"></span>
         </div>
-      </div>
-
-    </article>
-    <article class="trip">
-      <div class="trip__image-container">
-        <img src="./images/trips/kazanskiy.png" alt="фото" class="trip__image">
-        <span class="trip__label trip__label_content_year">круглый год</span>
-      </div>
-      <div class="trip__info">
-        <span class="trip__time">2 часа</span>
-        <p class="trip__caption"><span class="trip__sale">Акция - </span>Обзорная экскурсия по рекам и каналам с
-          остановками Hop on Hop Off 2019</p>
-        <ul class="trip__descriptions">
-          <li class="trip__description">Билет на целый день</li>
-          <li class="trip__description">Неограниченное число катаний</li>
-          <li class="trip__description">6 остановок у главных достопримечательностей</li>
-          <li class="trip__description">Ближайший рейс сегодня
-            <ul class="trip__departures">
-              <li class="trip__departure">12:00</li>
-              <li class="trip__departure">13:00</li>
-              <li class="trip__departure">14:00</li>
-              <li class="trip__departure">15:00</li>
-              <!--          <li class="trip__departure">16:00</li>-->
-            </ul>
-          </li>
-        </ul>
-        <div class="trip__footer">
-          <div class="trip__prices">
-            <span class="trip__price">900&nbsp;&#8381;</span>
-            <span class="trip__cash-price">1200&nbsp;&#8381; на причале</span>
+        <div class="trip__info">
+          <span class="trip__time"></span>
+          <p class="trip__caption"><span class="trip__sale"></span><span id="caption"></span></p>
+          <ul class="trip__descriptions"></ul>
+          <div class="trip__footer">
+            <div class="trip__prices">
+              <span class="trip__price"><span id="price"></span>&nbsp;&#8381;</span>
+              <span class="trip__cash-price"><span id="cash-price"></span>&nbsp;&#8381; на причале</span>
+            </div>
+            <button type="button" class="trip__button">Подробнее</button>
           </div>
-          <button type="button" class="trip__button">Подробнее</button>
         </div>
-      </div>
+      </article>
+    </template>
 
-    </article>
-    <!--        </template>-->
+    <template class="trip__li-template">
+      <li class=""></li>
+    </template>
+
+    <template class="trip__departures-template">
+      <li class="trip__description">
+        <span class="trip__description-text">Ближайший рейс сегодня</span>
+        <ul class="trip__departures"></ul>
+      </li>
+    </template>
   </section>
-  <a href="./order.html" class="trip__button content__button">Перейти к расчету стоимости</a>
+  <a href="./pages/order.html" class="trip__button content__button">Перейти к расчету стоимости</a>
 </main>
+<script src="./index.js" type="module"></script>
 </body>
 </html>

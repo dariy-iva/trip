@@ -28,6 +28,10 @@
   line-height: 1.4;
 }
 
+.trip__label_hidden {
+  display: none;
+}
+
 .trip__label_content_new {
   background-color: var(--color-yellow);
   color: var(--color-light-black);
@@ -85,7 +89,7 @@
 .trip__description {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /*align-items: center;*/
   gap: 13px;
   font-weight: 400;
   font-size: 14px;
@@ -95,11 +99,16 @@
   background: url("../../images/check.svg") left 5px / 16px 12px no-repeat;
 }
 
+.trip__description-text {
+  min-width: max-content;
+}
+
 .trip__departures {
   margin: 0;
   padding: 0;
   list-style-type: none;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 6px;
 }
