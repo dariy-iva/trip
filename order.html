@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поездки</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="./order.css">
+</head>
+<body class="body">
+<main class="content">
+  <h1>Калькулятор стоимости билетов</h1>
+  <form name="calculator" class="form">
+
+    <label class="form-label">Выберите направление:
+      <select class="form-select" name="route" id="route" required>
+        <option value="toB">из A в B</option>
+        <option value="toA">из B в A</option>
+        <option value="round">из A в B и обратно в А</option>
+      </select></label>
+
+    <label class="form-label">Выберите время отправления:
+      <select class="form-select" name="time" id="time" required></select>
+    </label>
+
+    <label class="form-label form__time-back" id="label-of-time-back">Выберите время обратного отправления:
+      <select class="form-select" name="time-back" id="time-back"></select>
+    </label>
+
+    <label class="form-label">Количество билетов:
+      <input type="number" class="form-control" id="num" min="0" step="1" required>
+    </label>
+
+    <button type="submit" aria-label="Кнопка расчета стоимости заказа" class="btn btn-warning">Посчитать</button>
+  </form>
+
+  <p class="result" id="result">Вы выбрали <span id="count"></span> по маршруту <span id="tariff"></span> стоимостью <span id="sum"></span>&nbsp;руб.
+    Это путешествие займет у вас <span id="travel-time"></span>&nbsp;минут.
+    Теплоход отправляется в <span id="departure"></span>, а прибудет в <span id="arrival"></span>.</p>
+
+  <template class="time-option__template">
+    <option></option>
+  </template>
+
+</main>
+<script src="./index.js" type="module"></script>
+</body>
+</html>

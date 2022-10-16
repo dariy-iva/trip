@@ -1,12 +1,124 @@
-const trips = [
-  {
-    title: 'Обзорная экскурсия по рекам и каналам  с остановками Hop on Hop Off 2019',
-    sale: true,
-    new: true,
-    options: ['Билет на целый день', 'Неограниченное число катаний', '6 остановок у главных достопримечательностей', 'Ближайший рейс сегодня'],
-    time: '2 часа', //переделать на число, если успею
-    price: '900',
-    priceCash: '1200',
-    departure: [{hour: 12, min: 0}, {hour: 13, min: 0}, {hour: 14, min: 0}, {hour: 15, min: 0}, {hour: 16, min: 0}]
+import {
+  departureToB,
+  departureToA,
+  priceTicketOneWay,
+  priceTicketRound,
+  timeOneWay
+} from './scripts/constants/constants.js';
+
+const form = document.forms.calculator;
+const routeSelect = document.querySelector('#route');
+const timeSelect = document.querySelector('#time');
+const timeBackSelect = document.querySelector('#time-back');
+const numInput = document.querySelector('#num');
+const timeBackElement = document.querySelector('#label-of-time-back');
+
+const resultElement = document.querySelector('#result');
+const countElement = document.querySelector('#count');
+const tariffElement = document.querySelector('#tariff');
+const travelTimeElement = document.querySelector('#travel-time');
+const sumElement = document.querySelector('#sum');
+const departureElement = document.querySelector('#departure');
+const arrivalElement = document.querySelector('#arrival');
+
+const localeDepartureToB = getLocalTimeDepartures(departureToB);
+const localeDepartureToA = getLocalTimeDepartures(departureToA);
+
+function getLocalTimeDepartures(dateList) {
+  return dateList.map(item => {
+    const nowDate = new Date(item + ' GMT+3');
+    const nowHours = nowDate.getHours() > 9 ? nowDate.getHours() : '0' + nowDate.getHours();
+    const nowMinutes = nowDate.getMinutes() > 9 ? nowDate.getMinutes() : '0' + nowDate.getMinutes();
+    return nowHours + ':' + nowMinutes;
+  });
+}
+
+function renderOptionList(valueList, selectSelector) {
+  selectSelector.innerHTML = '';
+  valueList.forEach(item => {
+    const option = document
+      .querySelector('.time-option__template')
+      .content
+      .firstElementChild
+      .cloneNode(true);
+    option.value = item;
+    option.textContent = item;
+    selectSelector.append(option);
+  })
+}
+
+function counterArrivalTime(departure, time) {
+  const hoursDeparture = +(departure.split(':')[0])
+  const minutesDeparture = +(departure.split(':')[1])
+
+  const hoursArrival = minutesDeparture + time < 60
+    ? departure.split(':')[0]
+    : Math.floor((minutesDeparture + time) / 60) + hoursDeparture;
+  const minutesArrival = minutesDeparture + time < 60
+    ? minutesDeparture + time
+    : (minutesDeparture + time) % 60;
+
+  return (hoursArrival > 9 ? hoursArrival : '0' + hoursArrival) + ':' + (minutesArrival > 9 ? minutesArrival : '0' + minutesArrival);
+}
+
+function setResults(config) {
+  const {tariff, departure, departureBack, number} = config;
+  const lastNumber = +number.toString().slice(-1)
+  const numberText = 'билет' + (lastNumber === 1 && (number < 2 || number > 20)
+    ? ''
+    : (lastNumber > 1 && lastNumber < 5) && (number < 5 || number > 20)
+      ? 'а'
+      : 'ов');
+  countElement.textContent = number + ' ' + numberText;
+  tariffElement.textContent = routeSelect[routeSelect.selectedIndex].textContent;
+  sumElement.textContent = (tariff === 'round' ? priceTicketRound : priceTicketOneWay) * number;
+  travelTimeElement.textContent = tariff === 'round' ? timeOneWay * 2 : timeOneWay;
+  departureElement.textContent = departure;
+  arrivalElement.textContent = counterArrivalTime(tariff === 'round' ? departureBack : departure, timeOneWay);
+}
+
+function handleRouteChange(e) {
+  const value = e.target.value;
+
+  switch (value) {
+    case 'round':
+      renderOptionList(localeDepartureToB, timeSelect);
+      renderOptionList(localeDepartureToA, timeBackSelect);
+      timeBackElement.required = true;
+      timeBackElement.classList.add('form__time-back_show');
+      break;
+    case 'toA':
+      timeBackElement.classList.remove('form__time-back_show');
+      renderOptionList(localeDepartureToA, timeSelect);
+      break;
+    case 'toB':
+      timeBackElement.classList.remove('form__time-back_show');
+      renderOptionList(localeDepartureToB, timeSelect);
+      break;
   }
-];
+}
+
+function handleTimeChange(e) {
+  if (routeSelect.value === 'round') {
+    const newDepartureToA = localeDepartureToA.filter(item => item > e.target.value)
+    renderOptionList(newDepartureToA, timeBackSelect);
+  }
+}
+
+function handleSubmitForm(e) {
+  e.preventDefault();
+  resultElement.classList.add('result_show');
+
+  setResults({
+    tariff: routeSelect.value,
+    number: numInput.value,
+    departure: timeSelect.value,
+    departureBack: timeBackSelect.value
+  });
+}
+
+routeSelect.addEventListener('change', handleRouteChange);
+timeSelect.addEventListener('change', handleTimeChange);
+form.addEventListener('submit', handleSubmitForm);
+
+renderOptionList(localeDepartureToB, timeSelect);
