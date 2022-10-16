@@ -24,6 +24,7 @@ const arrivalElement = document.querySelector('#arrival');
 const localeDepartureToB = getLocalTimeDepartures(departureToB);
 const localeDepartureToA = getLocalTimeDepartures(departureToA);
 
+// извлечение времени из исходных данных + его перевод в локальный часовой пояс
 function getLocalTimeDepartures(dateList) {
   return dateList.map(item => {
     const nowDate = new Date(item + ' GMT+3');
@@ -33,6 +34,7 @@ function getLocalTimeDepartures(dateList) {
   });
 }
 
+// отрисовка вариантов выбора из списка на странице
 function renderOptionList(valueList, selectSelector) {
   selectSelector.innerHTML = '';
   valueList.forEach(item => {
@@ -47,6 +49,7 @@ function renderOptionList(valueList, selectSelector) {
   })
 }
 
+// счетчик времени прибытия
 function counterArrivalTime(departure, time) {
   const hoursDeparture = +(departure.split(':')[0])
   const minutesDeparture = +(departure.split(':')[1])
@@ -61,6 +64,7 @@ function counterArrivalTime(departure, time) {
   return (hoursArrival > 9 ? hoursArrival : '0' + hoursArrival) + ':' + (minutesArrival > 9 ? minutesArrival : '0' + minutesArrival);
 }
 
+// отрисовка результатов подсчета на странице
 function setResults(config) {
   const {tariff, departure, departureBack, number} = config;
   const lastNumber = +number.toString().slice(-1)
@@ -77,6 +81,8 @@ function setResults(config) {
   arrivalElement.textContent = counterArrivalTime(tariff === 'round' ? departureBack : departure, timeOneWay);
 }
 
+
+// обработчики событий формы
 function handleRouteChange(e) {
   const value = e.target.value;
 
