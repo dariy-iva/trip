@@ -1,5 +1,6 @@
 @import "./vendor/normalize.css";
-@import "vendor/font/opensans/opensans.css";
+@import "./vendor/font/opensans/opensans.css";
+@import "./order.css";
 
 
 .body {
@@ -191,6 +192,11 @@
   border: .5px solid var(--color-dark-yellow);
   border-radius: 20px;
   background-color: var(--color-yellow);
+}
+
+.link {
+  text-decoration: none;
+  margin-top: 25px;
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {

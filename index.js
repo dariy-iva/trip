@@ -3,7 +3,9 @@ import {
   departureToA,
   priceTicketOneWay,
   priceTicketRound,
-  timeOneWay
+  timeOneWay,
+  timeBackElementShowSelector,
+  resultElementShowSelector
 } from './scripts/constants/constants.js';
 
 const form = document.forms.calculator;
@@ -89,16 +91,16 @@ function handleRouteChange(e) {
   switch (value) {
     case 'round':
       renderOptionList(localeDepartureToB, timeSelect);
-      renderOptionList(localeDepartureToA, timeBackSelect);
+      renderOptionList(localeDepartureToA.filter(item => item > counterArrivalTime(timeSelect.value, timeOneWay)), timeBackSelect);
       timeBackElement.required = true;
-      timeBackElement.classList.add('form__time-back_show');
+      timeBackElement.classList.add(timeBackElementShowSelector);
       break;
     case 'toA':
-      timeBackElement.classList.remove('form__time-back_show');
+      timeBackElement.classList.remove(timeBackElementShowSelector);
       renderOptionList(localeDepartureToA, timeSelect);
       break;
     case 'toB':
-      timeBackElement.classList.remove('form__time-back_show');
+      timeBackElement.classList.remove(timeBackElementShowSelector);
       renderOptionList(localeDepartureToB, timeSelect);
       break;
   }
@@ -106,14 +108,14 @@ function handleRouteChange(e) {
 
 function handleTimeChange(e) {
   if (routeSelect.value === 'round') {
-    const newDepartureToA = localeDepartureToA.filter(item => item > e.target.value)
+    const newDepartureToA = localeDepartureToA.filter(item => item > counterArrivalTime(e.target.value, timeOneWay))
     renderOptionList(newDepartureToA, timeBackSelect);
   }
 }
 
 function handleSubmitForm(e) {
   e.preventDefault();
-  resultElement.classList.add('result_show');
+  resultElement.classList.add(resultElementShowSelector);
 
   setResults({
     tariff: routeSelect.value,

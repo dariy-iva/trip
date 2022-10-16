@@ -16,3 +16,5 @@ export const departureToA = ['2021-08-21 18:30:00', '2021-08-21 18:45:00', '2021
 export const priceTicketOneWay = 700;
 export const priceTicketRound = 1200;
 export const timeOneWay = 50;
+export const timeBackElementShowSelector = 'order__time-back_show';
+export const resultElementShowSelector = 'order__result_show';
