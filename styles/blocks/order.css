@@ -1,18 +1,3 @@
-.header {
-  padding: 15px;
-}
-
-.header__link {
-  text-decoration: none;
-  color: var(--color-dark-yellow);
-  transition: color .3s;
-}
-
-.header__link:hover {
-  color: var(--color-dark-yellow);
-  opacity: .6;
-}
-
 .order__title {
   max-width: 350px;
   margin: 0 auto 25px;
@@ -59,9 +44,5 @@
 
   .order__result {
     max-width: 500px;
-  }
-
-  .header {
-    padding: 15px 60px;
   }
 }

@@ -1,0 +1,20 @@
+.header {
+  padding: 15px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: var(--color-dark-yellow);
+  transition: color .3s;
+}
+
+.header__link:hover {
+  color: var(--color-dark-yellow);
+  opacity: .6;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 15px 60px;
+  }
+}

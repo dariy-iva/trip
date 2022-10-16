@@ -1,0 +1,11 @@
+.trips {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (min-width: 1200px) {
+  .trips {
+    gap: 60px;
+  }
+}
