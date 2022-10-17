@@ -130,3 +130,5 @@ timeSelect.addEventListener('change', handleTimeChange);
 form.addEventListener('submit', handleSubmitForm);
 
 renderOptionList(localeDepartureToB, timeSelect);
+
+document.querySelector('.body').classList.remove('body_hidden');

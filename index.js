@@ -65,3 +65,5 @@ function renderTripList() {
 }
 
 renderTripList();
+
+document.querySelector('.body').classList.remove('body_hidden');

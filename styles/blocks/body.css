@@ -20,3 +20,7 @@
   --color-white: #fff;
   background-color: var(--color-white);
 }
+
+.body_hidden {
+  display: none;
+}
